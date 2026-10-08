@@ -18,3 +18,7 @@ A aplicação está a ser construída seguindo o passo a passo e as boas prátic
 1. Clone este repositório:
    ```bash
    git clone https://github.com/Gabriel-Domingueti/springboot_greendogdelivery.git
+   cd springboot_greendogdelivery
+   mvn spring-boot:run
+   ```
+2. Abra o seu navegador e aceda ao painel de controlo: http://localhost:8080/

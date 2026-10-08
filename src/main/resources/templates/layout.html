@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Dog Delivery</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- JQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        body { padding-top: 20px; background-color: #f8f9fa; }
+        .navbar { margin-bottom: 30px; border-radius: 5px; }
+        .navbar-brand { font-weight: bold; color: #2E8B57 !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/img/hotdog-logo.png}" src="../static/img/hotdog-logo.png">
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="brand" href="https://www.casadocodigo.com.br">Casa do Código</a>
+                </li>
+                <li>
+                    <a class="brand" href="https://www.boaglio.com">boagilo.com</a>
+                </li>
+            </ul>
+        </nav>
+        <h1 layout:fragment="header">cabeçalho falso</h1>
+        <div layout:fragment="content">content falso</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

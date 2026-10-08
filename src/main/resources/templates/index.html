@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" http-equiv="Content-Type" content="width=device-width, initial-scale=1.0">
+    <title>Green Dog Delivery</title>
+</head>
+<body>
+    <h1 layout:fragment="header">Green Dog Delivery
+        <small>Painel de Controle</small>
+    </h1>
+    <div layout:fragment="content" class="container">
+        <div class="jumbotron">
+            <a th:href="@{/ambiente/}" class="btn btn-lg btn-info">Ambiente</a>
+            <a th:href="@{/h2-console}" class="btn btn-lg btn-info">H2 Console</a>
+        </div>
+    </div>
+</body> 
+</html>

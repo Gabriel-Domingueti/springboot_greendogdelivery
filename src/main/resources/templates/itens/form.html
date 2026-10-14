@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulário de Item</title>
+</head>
+<body>
+<h1 layout:fragment="header">Cadastro de Item</h1>
+
+<div layout:fragment="content" class="container">
+	<div class="well">
+
+		<!-- O th:object="${item}" liga o form diretamente a classe Item.java -->
+		<form id="itemForm" th:action="@{/itens/(form)}" th:object="${item}" action="#" method="post" class="form-horizontal">
+
+			<!-- Bloco de exibicao de erros de validacao do back-end -->
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+					Erro de validacao
+				</p>
+			</div>
+
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="nome">Nome</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="preco">Preço</label>
+				<div class="col-sm-10">
+					<input type="number" step="0.01" class="form-control" th:field="*{preco}" th:classappend="${#fields.hasErrors('preco')} ? 'is-invalid'" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success">Gravar</button>
+					<a th:href="@{/itens/}" class="btn btn-default" style="margin-left: 10px;">Voltar</a>
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+</div>
+</body>
+</html>

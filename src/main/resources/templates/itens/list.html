@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Itens</title>
+</head>
+<body>
+<h1 layout:fragment="header">Lista de itens</h1>
+
+<div layout:fragment="content" class="container">
+	<a href="form.html" th:href="@{/itens/novo}" class="btn btn-primary" style="margin-bottom: 15px;">Novo item</a>
+
+	<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">
+		mensagem
+	</div>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+		<tr>
+			<td>ID</td>
+			<td>Nome</td>
+			<td>Preço</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:if="${itens.empty}">
+			<td colspan="3">Sem itens cadastrados</td>
+		</tr>
+		<tr th:each="item : ${itens}">
+			<td th:text="${item.id}">1</td>
+			<td>
+				<a href="view.html" th:href="@{'/itens/'+${item.id}}" th:text="${item.nome}">
+					nome
+				</a>
+			</td>
+			<td th:text="${item.preco}">0.00</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

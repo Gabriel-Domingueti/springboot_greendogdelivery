@@ -22,7 +22,6 @@ public class ClienteController {
     private final ClienteRepository clienteRepository;
     private static final String CLIENTE_URI = "clientes/";
 
-    // 1. Construtor injetando a dependência
     public ClienteController(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
@@ -54,7 +53,6 @@ public class ClienteController {
         return new ModelAndView("redirect:/" + CLIENTE_URI + "{cliente.id}", "cliente.id", cliente.getId());
     }
 
-    // 3. Rota corrigida
     @GetMapping(value = "alterar/{id}")
     public ModelAndView alterarForm(@PathVariable("id") Cliente cliente) {
         return new ModelAndView("clientes/form", "cliente", cliente);
@@ -62,7 +60,6 @@ public class ClienteController {
 
     @GetMapping(value = "remover/{id}")
     public ModelAndView remover(@PathVariable("id") Long id, RedirectAttributes redirect) {
-        // 4. Comando atualizado para Spring Boot 3
         this.clienteRepository.deleteById(id);
         Iterable<Cliente> clientes = this.clienteRepository.findAll();
 

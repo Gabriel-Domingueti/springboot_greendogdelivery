@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Detalhes do Item</title>
+</head>
+<body>
+<h1 layout:fragment="header">Item</h1>
+<div layout:fragment="content" class="well">
+
+	<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">
+		Item gravado com sucesso
+	</div>
+
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>Preço</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td id="id" th:text="${item.id}">123</td>
+			<td id="nome" th:text="${item.nome}">Nome</td>
+			<td id="preco" th:text="${item.preco}">0.00</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="pull-left">
+		<a href="form.html" th:href="@{'/itens/alterar/' + ${item.id}}" class="btn btn-primary btn-sm">alterar</a>
+		<a href="itens" th:href="@{'/itens/remover/' + ${item.id}}" class="btn btn-danger btn-sm">remover</a>
+		<a href="list.html" th:href="@{'/itens/'}" class="btn btn-default btn-sm">voltar</a>
+	</div>
+
+</div>
+</body>
+</html>

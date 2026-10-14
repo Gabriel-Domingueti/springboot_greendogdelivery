@@ -5,38 +5,67 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Itens</title>
+	<title>Gerenciar Itens</title>
 </head>
 <body>
-<h1 layout:fragment="header">Lista de itens</h1>
+<h1 layout:fragment="header">Gerenciar Itens</h1>
 
 <div layout:fragment="content" class="container">
-	<a href="form.html" th:href="@{/itens/novo}" class="btn btn-primary" style="margin-bottom: 15px;">Novo item</a>
 
-	<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">
-		mensagem
+	<!-- Mensagem de Sucesso -->
+	<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}"></div>
+
+	<!-- Barra de Pesquisa e Botão Novo Cadastro -->
+	<div class="row" style="margin-bottom: 20px;">
+		<div class="col-sm-8">
+			<form th:action="@{/itens/pesquisar}" method="get" class="form-inline">
+				<div class="form-group">
+					<input type="text" name="termo" class="form-control" placeholder="Buscar item por nome..." style="width: 300px;">
+				</div>
+				<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span> Pesquisar
+				</button>
+				<a th:href="@{/itens/}" class="btn btn-link">Limpar</a>
+			</form>
+		</div>
+
+		<div class="col-sm-4 text-right">
+			<a th:href="@{/itens/novo}" class="btn btn-primary">
+				<span class="glyphicon glyphicon-plus"></span> Novo Item
+			</a>
+		</div>
 	</div>
 
-	<table class="table table-bordered table-striped">
+	<!-- Tabela de Itens -->
+	<table class="table table-bordered table-striped table-hover">
 		<thead>
 		<tr>
-			<td>ID</td>
-			<td>Nome</td>
-			<td>Preço</td>
+			<th style="width: 10%;">ID</th>
+			<th style="width: 40%;">Nome</th>
+			<th style="width: 20%;">Preço</th>
+			<th style="width: 30%; text-align: center;">Ações</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr th:if="${itens.empty}">
-			<td colspan="3">Sem itens cadastrados</td>
+			<td colspan="4" class="text-center">Sem itens cadastrados.</td>
 		</tr>
 		<tr th:each="item : ${itens}">
 			<td th:text="${item.id}">1</td>
 			<td>
-				<a href="view.html" th:href="@{'/itens/'+${item.id}}" th:text="${item.nome}">
-					nome
+				<a th:href="@{'/itens/'+${item.id}}" th:text="${item.nome}">Nome do Item</a>
+			</td>
+			<td th:text="'R$ ' + ${item.preco}">R$ 0.00</td>
+			<td class="text-center">
+				<!-- Botão Alterar -->
+				<a th:href="@{'/itens/alterar/'+${item.id}}" class="btn btn-sm btn-warning">
+					<span class="glyphicon glyphicon-pencil"></span> Alterar
+				</a>
+				<!-- Botão Remover -->
+				<a th:href="@{'/itens/remover/'+${item.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?');">
+					<span class="glyphicon glyphicon-trash"></span> Remover
 				</a>
 			</td>
-			<td th:text="${item.preco}">0.00</td>
 		</tr>
 		</tbody>
 	</table>

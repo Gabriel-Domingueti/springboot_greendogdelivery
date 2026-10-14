@@ -1,40 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout}">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Gerenciar Clientes</title>
 </head>
 <body>
-    <h1 layout:fragment="header">Lista de clientes</h1>
-    <div layout:fragment="content" class="container">
-        <a href="form.html" th:href="@{/clientes/novo}">Novo cliente</a>
-        <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">
-            mensagem
+<h1 layout:fragment="header">Gerenciar Clientes</h1>
+
+<div layout:fragment="content" class="container">
+
+    <!-- Mensagem de Sucesso -->
+    <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}"></div>
+
+    <!-- Barra de Pesquisa e Botão Novo Cadastro -->
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-8">
+            <!-- Nota: O back-end precisará ter um mapeamento para /clientes/pesquisar -->
+            <form th:action="@{/clientes/pesquisar}" method="get" class="form-inline">
+                <div class="form-group">
+                    <input type="text" name="termo" class="form-control" placeholder="Buscar cliente..." style="width: 300px;">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span> Pesquisar
+                </button>
+                <a th:href="@{/clientes/}" class="btn btn-link">Limpar</a>
+            </form>
         </div>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Nome</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:if="${clientes.empty}">
-                    <td colspan="3">Sem clientes</td>
-                </tr>
-                <tr th:each="cliente : ${clientes}">
-                    <td th:text="${cliente.id}">1</td>
-                    <td>
-                        <a href="view.html" th:href="@{'/clientes/'+${cliente.id}}"th:text="${cliente.nome}">
-                            nome
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="col-sm-4 text-right">
+            <a th:href="@{/clientes/novo}" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span> Novo Cliente
+            </a>
+        </div>
     </div>
+
+    <!-- Tabela de Clientes -->
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th style="width: 10%;">ID</th>
+            <th style="width: 60%;">Nome</th>
+            <th style="width: 30%; text-align: center;">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${clientes.empty}">
+            <td colspan="3" class="text-center">Sem clientes cadastrados.</td>
+        </tr>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}">1</td>
+            <td>
+                <!-- Mantemos o link no nome para ver os Detalhes (view.html) -->
+                <a th:href="@{'/clientes/'+${cliente.id}}" th:text="${cliente.nome}">Nome do Cliente</a>
+            </td>
+            <td class="text-center">
+                <!-- Botão Alterar (Amarelo) -->
+                <a th:href="@{'/clientes/alterar/'+${cliente.id}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-pencil"></span> Alterar
+                </a>
+                <!-- Botão Remover (Vermelho) com aviso JS -->
+                <a th:href="@{'/clientes/remover/'+${cliente.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este cliente?');">
+                    <span class="glyphicon glyphicon-trash"></span> Remover
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

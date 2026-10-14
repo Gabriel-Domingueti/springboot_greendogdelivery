@@ -2,11 +2,7 @@ package com.greendogdelivery.springboot_greendogdelivery.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,6 +62,17 @@ public class ClienteController {
         ModelAndView mv = new ModelAndView("clientes/list", "clientes", clientes);
         mv.addObject("globalMessage", "Cliente removido com sucesso");
 
+        return mv;
+    }
+
+    @GetMapping("/pesquisar")
+    public ModelAndView pesquisar(@RequestParam("termo") String termo) {
+        // Busca no banco os clientes que correspondem ao termo
+        Iterable<Cliente> clientes = this.clienteRepository.findByNomeContainingIgnoreCase(termo);
+
+        // Devolve para a tela list.html
+        ModelAndView mv = new ModelAndView("clientes/list", "clientes", clientes);
+        mv.addObject("globalMessage", "Resultados da pesquisa para: '" + termo + "'");
         return mv;
     }
 }

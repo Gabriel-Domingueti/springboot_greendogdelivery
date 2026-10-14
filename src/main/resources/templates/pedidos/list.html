@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Pedidos</title>
+</head>
+<body>
+<h1 layout:fragment="header">Gerenciar Pedidos</h1>
+
+<div layout:fragment="content" class="container">
+
+    <!-- Mensagem de Sucesso -->
+    <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}"></div>
+
+    <!-- Barra de Pesquisa e Botão Novo Cadastro -->
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-8">
+            <form th:action="@{/pedidos/pesquisar}" method="get" class="form-inline">
+                <div class="form-group">
+                    <input type="text" name="termo" class="form-control" placeholder="Buscar pedido (ex: nome do cliente)..." style="width: 300px;">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span> Pesquisar
+                </button>
+                <a th:href="@{/pedidos/}" class="btn btn-link">Limpar</a>
+            </form>
+        </div>
+
+        <div class="col-sm-4 text-right">
+            <a th:href="@{/pedidos/novo}" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span> Novo Pedido
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabela de Pedidos -->
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th style="width: 10%;">ID</th>
+            <th style="width: 30%;">Cliente</th>
+            <th style="width: 15%;">Data</th>
+            <th style="width: 15%;">Valor Total</th>
+            <th style="width: 30%; text-align: center;">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${pedidos.empty}">
+            <td colspan="5" class="text-center">Sem pedidos cadastrados.</td>
+        </tr>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}">1</td>
+            <td>
+                <a th:href="@{'/pedidos/'+${pedido.id}}" th:text="${pedido.cliente != null ? pedido.cliente.nome : 'Sem Cliente'}">
+                    Nome do Cliente
+                </a>
+            </td>
+            <td th:text="${#dates.format(pedido.data, 'dd/MM/yyyy')}">01/01/2026</td>
+            <td th:text="'R$ ' + ${pedido.valorTotal}">R$ 0.00</td>
+            <td class="text-center">
+                <!-- Botão Alterar -->
+                <a th:href="@{'/pedidos/alterar/'+${pedido.id}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-pencil"></span> Alterar
+                </a>
+                <!-- Botão Remover -->
+                <a th:href="@{'/pedidos/remover/'+${pedido.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este pedido?');">
+                    <span class="glyphicon glyphicon-trash"></span> Remover
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

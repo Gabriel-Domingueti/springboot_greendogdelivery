@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido</title>
+</head>
+<body>
+<h1 layout:fragment="header">Pedido</h1>
+<div layout:fragment="content" class="well">
+
+    <div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">
+        Pedido gravado com sucesso
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Valor Total</th>
+            <th>Itens do Pedido</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="id" th:text="${pedido.id}">123</td>
+            <td id="cliente" th:text="${pedido.cliente != null ? pedido.cliente.nome : 'Sem Cliente'}">Cliente</td>
+            <td id="data" th:text="${#dates.format(pedido.data, 'dd/MM/yyyy')}">01/01/2026</td>
+            <td id="valorTotal" th:text="${pedido.valorTotal}">0.00</td>
+            <td>
+                <ul style="padding-left: 15px; margin-bottom: 0;">
+                    <li th:each="item : ${pedido.itens}" th:text="${item.nome} + ' (R$ ' + ${item.preco} + ')'">Item</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pull-left" style="margin-top: 15px;">
+        <a href="form.html" th:href="@{'/pedidos/alterar/' + ${pedido.id}}" class="btn btn-primary btn-sm">alterar</a>
+        <a href="pedidos" th:href="@{'/pedidos/remover/' + ${pedido.id}}" class="btn btn-danger btn-sm">remover</a>
+        <a href="list.html" th:href="@{'/pedidos/'}" class="btn btn-default btn-sm">voltar</a>
+    </div>
+
+</div>
+</body>
+</html>

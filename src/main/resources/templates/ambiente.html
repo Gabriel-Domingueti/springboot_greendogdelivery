@@ -8,50 +8,50 @@
     <title>Ambiente - Spring Actuator</title>
 </head>
 <body>
-<h1 layout:fragment="header">Ambiente - Spring Actuator</h1>
-
-<div layout:fragment="content" class="container">
-    <div class="well">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Link</th>
-                <th>Descrição</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><a th:href="@{/actuator}">actuator</a></td>
-                <td>Lista todos os links disponíveis.</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/actuator/threaddump}">threaddump</a></td>
-                <td>Faz um thread dump.</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/actuator/env}">env</a></td>
-                <td>Mostra properties do ConfigurableEnvironment do Spring.</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/actuator/health}">health</a></td>
-                <td>Mostra informações do status da aplicação.</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/actuator/metrics}">metrics</a></td>
-                <td>Mostra métricas da aplicação.</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{/actuator/mappings}">mappings</a></td>
-                <td>Exibe os caminhos dos @RequestMapping.</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div style="margin-top: 15px;">
-            <a th:href="@{/properties}" class="btn btn-success">System Properties</a>
-            <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints" target="_blank" class="btn btn-success" style="margin-left: 10px;">Lista completa de endpoints</a>
+    <h1 layout:fragment="header">Ambiente - Spring Actuator</h1>
+    
+    <div layout:fragment="content" class="container">
+        <div class="well">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Link</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a th:href="@{/actuator}">actuator</a></td>
+                        <td>Lista todos os links disponíveis.</td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/actuator/threaddump}">threaddump</a></td>
+                        <td>Faz um thread dump.</td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/actuator/env}">env</a></td>
+                        <td>Mostra properties do ConfigurableEnvironment do Spring.</td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/actuator/health}">health</a></td>
+                        <td>Mostra informações do status da aplicação.</td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/actuator/metrics}">metrics</a></td>
+                        <td>Mostra métricas da aplicação.</td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/actuator/mappings}">mappings</a></td>
+                        <td>Exibe os caminhos dos @RequestMapping.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 15px;">
+                <a th:href="@{/properties}" class="btn btn-success">System Properties</a>
+                <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints" target="_blank" class="btn btn-success" style="margin-left: 10px;">Lista completa de endpoints</a>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>

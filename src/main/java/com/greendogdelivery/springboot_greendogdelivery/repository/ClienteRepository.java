@@ -1,9 +1,10 @@
 package com.greendogdelivery.springboot_greendogdelivery.repository;
 
-import com.greendogdelivery.springboot_greendogdelivery.domain.Cliente;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.greendogdelivery.springboot_greendogdelivery.domain.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> findByNomeContainingIgnoreCase(String termo);

@@ -8,4 +8,5 @@ import com.greendogdelivery.springboot_greendogdelivery.domain.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> findByNomeContainingIgnoreCase(String termo);
+    Cliente findByNome(String nome);
 }
